@@ -4,6 +4,15 @@
 </div>
 </template>
 
+<script>
+  export default {
+    name:'App',
+    mounted(){
+      this.$store.dispatch('getToken')
+    }
+  }
+</script>
+
 <style lang="scss">
 #app {
     font-family: 'Avenir', Helvetica, Arial, sans-serif;
