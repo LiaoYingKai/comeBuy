@@ -1,6 +1,9 @@
-<template >
-<div class="">
-  fuck
+<template>
+<div class="mainPage">
+  <nav>
+    test
+  </nav>
+  <router-view></router-view>
 </div>
 </template>
 

@@ -7,8 +7,16 @@
 <script>
   export default {
     name:'App',
+    methods:{
+      getUserInfo:function(){
+        if(this.$store.getters.token){
+          this.$store.dispatch('getUserInfo')
+        }
+      }
+    },
     mounted(){
       this.$store.dispatch('getToken')
+      this.getUserInfo()
     }
   }
 </script>

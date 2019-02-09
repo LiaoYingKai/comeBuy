@@ -14,9 +14,12 @@ export default {
   methods: {
     sellerLogin: function() {
       this.loginFlow()
+      this.$router.push('mainPage/seller')
+
     },
     buyerLogin: function() {
       this.loginFlow()
+      this.$router.push('mainPage/buyer')
     },
     loginFlow:function(){
       if(this.$store.getters.token){
