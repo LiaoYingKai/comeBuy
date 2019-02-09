@@ -36,10 +36,10 @@ export default new Vuex.Store({
       })
     },
     getUserInfo:({commit})=>{
-      API('GET','users')
-      .then(response=>{
-        commit('setUserInfo',response.data.response)
-      })
+      return API('GET','users')
+    },
+    setUserInfo:({commit},data)=>{
+      commit('setUserInfo',data)
     }
   }
 })

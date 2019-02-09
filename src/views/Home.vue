@@ -9,13 +9,13 @@
 </template>
 
 <script>
+import FBlogin from '../units/token.js'
 export default {
   name: 'home',
   methods: {
     sellerLogin: function() {
       this.loginFlow()
       this.$router.push('mainPage/seller')
-
     },
     buyerLogin: function() {
       this.loginFlow()
@@ -25,22 +25,9 @@ export default {
       if(this.$store.getters.token){
         this.$store.dispatch('getUserInfo')
       }else{
-        this.fbLogin()
+        FBlogin()
       }
     },
-    fbLogin:function(){
-      FB.login(response=>{
-        let data = {
-          expiresIn:response.authResponse.expiresIn
-        }
-        $cookies.set('FBtoken',response.authResponse.accessToken)
-        this.$store.dispatch('getToken')
-        this.createAccount(data)
-      })
-    },
-    createAccount:function(data){
-      this.$store.dispatch('createAccount',data)
-    }
   }
 }
 </script>
