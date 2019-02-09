@@ -1,0 +1,62 @@
+@mixin buttonStyle($margin,$padding,$size,$color) {
+  font-size: $size;
+  margin: $margin;
+  border: 0;
+  padding: $padding;
+  border-radius: 5px;
+  cursor: pointer;
+  background-color: $color;
+  color: white;
+}
+@mixin blockStyle() {
+  padding: 0 30px;
+  height: 90vh;
+  // overflow: scroll;
+  // overflow-x: hidden;
+}
+@mixin viewStyle($color) {
+  display: flex;
+  justify-content: space-around;
+  align-items: flex-start;
+  background-color: $color;
+  height: 100vh;
+  padding-top: 30px;
+}
+@mixin productListStyle() {
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+  background-color: #fff;
+  padding: 20px;
+}
+@mixin listTypesetting() {
+  display: grid;
+  grid-template-columns: 45% 45%;
+  grid-template-rows: 300px;
+  justify-content: space-around;
+  grid-gap: 20px;
+  border-radius: 10px;
+}
+@mixin popupBox() {
+  position: fixed;
+  z-index: 1;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  overflow: auto;
+  background-color: rgba(0,0,0,0.4);
+
+  .modalContent {
+    z-index: 2;
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    margin: auto;
+    width: 300px;
+    height: 500px;
+    background-color: #fefefe;
+  }
+}
