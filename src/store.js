@@ -7,26 +7,38 @@ Vue.use(Vuex)
 export default new Vuex.Store({
   state: {
     fbToken:'',
-
+    userInfo:'',
   },
   getters:{
     token:(state)=>{
       return state.fbToken
+    },
+    userInfo:(state)=>{
+      return state.userInfo
     }
   },
   mutations: {
     setToken:(state,token)=>{
       state.fbToken = token
+    },
+    setUserInfo:(state,data)=>{
+      state.userInfo = data
     }
   },
   actions: {
     getToken:({commit})=>{
       commit('setToken',$cookies.get('FBtoken'))
     },
-    createAccount:({},data)=>{
+    createAccount:({dispatch},data)=>{
       API('POST','token',data)
       .then(response=>{
-        console.log(response)
+        dispatch('getUserInfo')
+      })
+    },
+    getUserInfo:({commit})=>{
+      API('GET','users')
+      .then(response=>{
+        commit('setUserInfo',response.data.response)
       })
     }
   }

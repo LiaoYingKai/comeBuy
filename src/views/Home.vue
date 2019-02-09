@@ -13,29 +13,20 @@ export default {
   name: 'home',
   methods: {
     sellerLogin: function() {
-      // this.createAccount()
-      this.fbLogin()
-      // this.$store.dispatch("setIdentity", "Seller")
-      // this.$router.push('/Seller')
+      this.loginFlow()
     },
     buyerLogin: function() {
-      // this.cookiesLogin()
-      // this.$store.dispatch("setIdentity", "Buyer")
-      // this.$router.push('/Buyer')
+      this.loginFlow()
     },
     loginFlow:function(){
       if(this.$store.getters.token){
-        this.fbLogin()
+        this.$store.dispatch('getUserInfo')
       }else{
-
+        this.fbLogin()
       }
-    },
-    cookiesLogin:function(){
-      console.log($cookies.get('test'))
     },
     fbLogin:function(){
       FB.login(response=>{
-        console.log(response)
         let data = {
           expiresIn:response.authResponse.expiresIn
         }
