@@ -15,11 +15,11 @@ export default {
   methods: {
     sellerLogin: function() {
       this.loginFlow()
-      this.$router.push('mainPage/seller')
+      this.$router.push('mainPage/product')
     },
     buyerLogin: function() {
       this.loginFlow()
-      this.$router.push('mainPage/buyer')
+      this.$router.push('mainPage/shoppingCart')
     },
     loginFlow:function(){
       if(this.$store.getters.token){

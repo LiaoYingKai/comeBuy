@@ -14,8 +14,6 @@ export default {
         this.$store.dispatch('getUserInfo')
           .then(response => this.$store.dispatch('setUserInfo', response.data.response))
           .catch(error => {
-            console.log(error)
-            console.log(changeToken)
             changeToken()
           })
       }
