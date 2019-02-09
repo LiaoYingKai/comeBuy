@@ -9,9 +9,9 @@
         <el-menu mode="horizontal" :router="true">
           <el-submenu index="1">
             <template slot="title">買家</template>
-            <el-menu-item index="2-1">觀看直播</el-menu-item>
-            <el-menu-item index="2-2">更新個人資訊</el-menu-item>
-            <el-menu-item index="2-3">查看訂單</el-menu-item>
+            <el-menu-item index="watchRoom">觀看直播</el-menu-item>
+            <el-menu-item index="userInfo">更新個人資訊</el-menu-item>
+            <el-menu-item index="ShoppingCart">查看訂單</el-menu-item>
           </el-submenu>
           <el-submenu index="2">
             <template slot="title">賣家</template>

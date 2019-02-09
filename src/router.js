@@ -2,10 +2,13 @@ import Vue from 'vue'
 import Router from 'vue-router'
 import Home from './views/Home.vue'
 import MainPage from './views/MainPage.vue'
-import Live from './components/seller/Live.vue'
+import ManageLive from './components/seller/ManageLive.vue'
 import Product from './components/seller/Product.vue'
 import Order from './components/seller/Order.vue'
-import Buyer from './components/buyer/Buyer.vue'
+import WatchLive from './components/buyer/WatchLive.vue'
+import UserInfo from './components/buyer/UserInfo.vue'
+import ShoppingCart from './components/buyer/ShoppingCart.vue'
+
 Vue.use(Router)
 export default new Router({
   mode: 'history',
@@ -20,7 +23,7 @@ export default new Router({
     component: MainPage,
     children: [{
       path: 'liveRoom',
-      component: Live
+      component: ManageLive
     }, {
       path: 'product',
       component: Product
@@ -28,8 +31,14 @@ export default new Router({
       path: 'order',
       component: Order
     }, {
-      path: 'buyer',
-      component: Buyer
+      path: 'watchRoom',
+      component: WatchLive
+    },{
+      path: 'userInfo',
+      component: UserInfo
+    },{
+      path: 'shoppingCart',
+      component: ShoppingCart
     }]
   }, ]
 })

@@ -1,7 +1,7 @@
 <template >
-<div class="">
-  fuck
-</div>
+  <div class="">
+    購物車
+  </div>
 </template>
 
 <script>
