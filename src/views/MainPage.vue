@@ -6,7 +6,7 @@
     </el-col>
     <el-col :span="14">
       <div class="">
-        <el-menu mode="horizontal" :router="false">
+        <el-menu mode="horizontal" :router="true">
           <el-submenu index="1">
             <template slot="title">買家</template>
             <el-menu-item index="2-1">觀看直播</el-menu-item>
@@ -15,9 +15,9 @@
           </el-submenu>
           <el-submenu index="2">
             <template slot="title">賣家</template>
-            <el-menu-item index="#">開始直播</el-menu-item>
-            <el-menu-item index="#">商品資訊</el-menu-item>
-            <el-menu-item index="#">管理訂單</el-menu-item>
+            <el-menu-item index="liveRoom">開始直播</el-menu-item>
+            <el-menu-item index="product">商品資訊</el-menu-item>
+            <el-menu-item index="order">管理訂單</el-menu-item>
           </el-submenu>
         </el-menu>
       </div>
