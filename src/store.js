@@ -54,7 +54,7 @@ export default new Vuex.Store({
       return formAPI('POST','items',data)
     },
     getProduct:({commit})=>{
-      API('GET','items')
+      return API('GET','items')
       .then(response=>{
         console.log(response)
         commit('setProduct',response.data.response)

@@ -19,7 +19,7 @@ export default {
       }
     }
   },
-  mounted() {
+  created() {
     this.$store.dispatch('getToken')
     this.getUserInfo()
   }
@@ -40,7 +40,7 @@ p {
 body {
     padding: 0;
     margin: 0;
-    overflow: hidden;
+    // overflow: hidden;
     background-color: #f5f5f5;
 }
 </style>

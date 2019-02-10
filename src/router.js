@@ -3,7 +3,7 @@ import Router from 'vue-router'
 import Home from './views/Home.vue'
 import MainPage from './views/MainPage.vue'
 import ManageLive from './components/seller/ManageLive.vue'
-import Product from './components/seller/Product.vue'
+import Products from './components/seller/Products.vue'
 import Order from './components/seller/Order.vue'
 import WatchLive from './components/buyer/WatchLive.vue'
 import UserInfo from './components/buyer/UserInfo.vue'
@@ -26,7 +26,7 @@ export default new Router({
       component: ManageLive
     }, {
       path: 'product',
-      component: Product
+      component: Products
     }, {
       path: 'order',
       component: Order

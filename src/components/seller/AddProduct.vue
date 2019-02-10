@@ -1,8 +1,6 @@
 <template lang="html">
   <div class="model" v-if="isOpen">
     <div class="modal-content">
-
-
     <el-row :gutter="20">
       <div class="close" @click="closeAddProduct">
         <font-awesome-icon icon="times" />
