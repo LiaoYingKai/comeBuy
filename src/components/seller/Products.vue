@@ -49,9 +49,7 @@ export default {
 
 <style lang="scss" scoped>
 .products{
-  overflow-y: auto;
-  overflow-x: hidden;
-  position: relative;
+
 }
 .product{
     max-width: 960px;

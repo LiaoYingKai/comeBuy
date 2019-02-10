@@ -1,7 +1,6 @@
 <template>
 <div class="mainPage">
   <nav>
-
     <el-row :gutter="20" class="navbar">
       <el-col :span="4">
         <img src="../assets/logo.jpg" alt="">
@@ -71,9 +70,12 @@ export default {
 <style lang="scss" scoped>
 nav {
     background-color: #fff;
+    width: 100vw;
+    position: fixed;
+    top: 0;
+    z-index: 1;
 }
 .navbar {
-    max-width: 1200px;
     margin: 0 auto !important;
     height: 60px;
     display: flex;
@@ -93,8 +95,7 @@ nav {
     cursor: pointer;
 }
 .container {
-    margin-top: 20px;
     max-width: 1200px;
-    margin: 0 auto !important;
+    margin: 80px auto 0px !important;
 }
 </style>
