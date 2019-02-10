@@ -59,11 +59,23 @@ export default {
   },
   methods: {
     deleteProduct: function(id) {
-      let deleteItem = {
-        items: []
-      }
-      deleteItem.items.push(id)
-      this.$store.dispatch('deleteProduct', deleteItem)
+      this.$confirm('是否刪除商品', '提示', {
+          confirmButtonText: '確定',
+          cancelButtonText: '取消',
+          type: 'warning'
+        }).then(() => {
+          let deleteItem = {
+            items: []
+          }
+          deleteItem.items.push(id)
+          this.$store.dispatch('deleteProduct', deleteItem)
+          this.successfulDeleteNotify()
+        }).catch(() => {
+          this.$message({
+            type: 'info',
+            message: '已取消删除'
+          });
+        });
     },
     aditProduct: function(id) {
       this.isEdit = true
@@ -73,10 +85,8 @@ export default {
       this.isEdit = false
     },
     postEdit: function(id) {
-
       let data = new FormData();
       let productInfo = this.product
-
       for (let key in productInfo) {
         data.append(key, productInfo[key]);
       }
@@ -89,22 +99,34 @@ export default {
         dataForm: data
       }
       this.cancelEditProduct()
-      this.$store.dispatch('editProduct',product)
+      this.$store.dispatch('editProduct', product)
+      this.successfulEditNotify()
     },
-    onFileChange(e) {
+    onFileChange: function(e) {
       let files = e.target.files || e.dataTransfer.files;
       if (!files.length)
         return;
       this.createImage(files[0]);
       this.picture = files[0]
     },
-    createImage(file) {
+    createImage: function(file) {
       let image = new Image();
       let reader = new FileReader();
       reader.onload = (e) => {
         this.previewPicture = e.target.result;
       };
       reader.readAsDataURL(file);
+    },
+    successfulEditNotify:function(){
+      this.$notify({
+          title: '編輯成功',
+          type: 'success'
+        });
+    },
+    successfulDeleteNotify:function(){
+      this.$notify.info({
+          title: '刪除商品',
+        });
     }
   }
 }

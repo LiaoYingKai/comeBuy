@@ -117,6 +117,7 @@ export default {
         .then(() => {
           this.resetProduct()
           this.closeAddProduct()
+          this.successfulAddNotify()
           this.$store.dispatch('getProduct')
         })
         .catch(error => {
@@ -152,7 +153,13 @@ export default {
         this.previewPicture = e.target.result;
       };
       reader.readAsDataURL(file);
-    }
+    },
+    successfulAddNotify:function(){
+      this.$notify({
+          title: '新增成功',
+          type: 'success'
+        });
+    },
   },
 }
 </script>
