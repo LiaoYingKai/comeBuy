@@ -66,6 +66,11 @@ export default new Vuex.Store({
         console.log(response)
         dispatch('getProduct')
       })
+    },
+    editProduct:({dispatch},product)=>{
+      let Id = product.id
+      let dataForm = product.dataForm
+      // formAPI('POST',`items/${productId}`,dataForm)
     }
   }
 })
