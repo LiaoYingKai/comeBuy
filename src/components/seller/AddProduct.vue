@@ -12,21 +12,21 @@
         </div>
       </el-col>
       <el-col :span="12" :offset="1">
-        <el-form label-position="left" label-width="80px" :model="productInfo" ref="productInfo" @keyup.enter="test">
-          <el-form-item label="商品名稱">
+        <el-form label-position="left" label-width="80px" :model="productInfo" :rules="rules" ref="productInfo">
+          <el-form-item label="商品名稱" prop="name">
             <el-input v-model="productInfo.name"></el-input>
           </el-form-item>
-          <el-form-item label="商品描述">
+          <el-form-item label="商品描述" prop="description">
             <el-input v-model="productInfo.description"></el-input>
           </el-form-item>
-          <el-form-item label="數量">
+          <el-form-item label="數量" prop="stock">
             <el-input v-model.number="productInfo.stock"></el-input>
           </el-form-item>
-          <el-form-item label="成本">
-            <el-input v-model="productInfo.cost"></el-input>
+          <el-form-item label="成本" prop="cost">
+            <el-input v-model.number="productInfo.cost"></el-input>
           </el-form-item>
-          <el-form-item label="售價">
-            <el-input v-model="productInfo.unit_price"></el-input>
+          <el-form-item label="售價" prop="unit_price">
+            <el-input v-model.number="productInfo.unit_price"></el-input>
           </el-form-item>
           <el-form-item>
             <el-button @click="addProduct">提交</el-button>
@@ -51,14 +51,57 @@ export default {
         cost: '',
         unit_price: ''
       },
+      rules: {
+        name: [{
+          required: true,
+          message: '請輸入商品名稱',
+          trigger: 'blur'
+        }],
+        description: [{
+          required: true,
+          message: '請輸入商品描述',
+          trigger: 'blur'
+        }],
+        stock: [{
+            required: true,
+            message: '存貨不能爲空',
+            trigger: 'blur'
+
+          },
+          {
+            type: 'number',
+            message: '請輸入數字',
+            trigger: 'blur'
+          }
+        ],
+        cost: [{
+            required: true,
+            message: '成本不能爲空',
+            trigger: 'blur'
+
+          },
+          {
+            type: 'number',
+            message: '請輸入數字',
+            trigger: 'blur'
+          }],
+        unit_price: [{
+            required: true,
+            message: '售價不能爲空',
+            trigger: 'blur'
+
+          },
+          {
+            type: 'number',
+            message: '請輸入數字',
+            trigger: 'blur'
+          }]
+      },
       picture: '',
       previewPicture: ''
     }
   },
   methods: {
-    test: function(){
-      console.log("fuck")
-    },
     getProduct: function() {
       this.$store.dispatch('getProduct')
     },
@@ -81,6 +124,7 @@ export default {
         })
     },
     resetProduct: function() {
+      this.$refs['productInfo'].resetFields()
       this.productInfo = {
         name: '',
         description: '',
@@ -150,7 +194,7 @@ export default {
 }
 .close {
     position: absolute;
-    top: 0px;
+    top: 0;
     right: 10px;
     opacity: 0.4;
     font-size: 24px;
