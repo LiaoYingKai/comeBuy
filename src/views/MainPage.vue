@@ -79,6 +79,7 @@ nav {
     margin: 0 auto !important;
     height: 60px;
     display: flex;
+    width:1200px;
     img {
         height: 60px;
     }
