@@ -26,10 +26,13 @@
     <el-col :span="2">
       <div class="">{{name}}</div>
     </el-col>
-    <el-col :span="2">登出</el-col>
+    <el-col :span="2">
+      <div class="logout" @click="logout">
+        登出
+      </div>
+    </el-col>
   </el-row>
-
-  <router-view></router-view>
+  <router-view class="space"></router-view>
 </div>
 </template>
 
@@ -38,6 +41,16 @@ export default {
   data() {
     return {
 
+    }
+  },
+  methods: {
+    test: function() {
+      console.log("fuck")
+    },
+    logout: function() {
+      console.log("fuck")
+      $cookies.remove('FBtoken')
+      this.$router.push('/')
     }
   },
   computed: {
@@ -53,7 +66,7 @@ export default {
 
 <style lang="scss" scoped>
 .nav {
-  height: 60px;
+    height: 60px;
     display: flex;
     background-color: #fff;
     img {
@@ -65,7 +78,13 @@ export default {
         align-items: center;
     }
 }
-.el-menu.el-menu--horizontal{
-  border:0px;
+.el-menu.el-menu--horizontal {
+    border: 0;
+}
+.logout{
+  cursor: pointer;
+}
+.space{
+  margin-top: 20px;
 }
 </style>

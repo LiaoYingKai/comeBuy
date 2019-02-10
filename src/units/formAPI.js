@@ -5,7 +5,7 @@ export default function API(method, path, data) {
     url: `https://facebookoptimizedlivestreamsellingsystem.rayawesomespace.space/api/${path}`,
     data: data,
     headers: {
-      'Content-Type': 'application/json',
+      'Content-Type': 'multipart/form-data',
       'X-Requested-With': 'XMLHttpRequest',
       'Authorization': `Bearer ${$cookies.get('FBtoken')}`
     },

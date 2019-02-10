@@ -1,6 +1,7 @@
 import Vue from 'vue'
 import Vuex from 'vuex'
 import API from './units/API.js'
+import formAPI from './units/formAPI.js'
 
 Vue.use(Vuex)
 
@@ -8,6 +9,7 @@ export default new Vuex.Store({
   state: {
     fbToken:'',
     userInfo:'',
+    products:[]
   },
   getters:{
     token:(state)=>{
@@ -15,14 +17,20 @@ export default new Vuex.Store({
     },
     userInfo:(state)=>{
       return state.userInfo
+    },
+    products:(state)=>{
+      return state.products
     }
   },
   mutations: {
     setToken:(state,token)=>{
       state.fbToken = token
     },
-    setUserInfo:(state,data)=>{
-      state.userInfo = data
+    setUserInfo:(state,userInfo)=>{
+      state.userInfo = userInfo
+    },
+    setProduct:(state,productList)=>{
+      state.products = productList
     }
   },
   actions: {
@@ -41,6 +49,16 @@ export default new Vuex.Store({
     },
     setUserInfo:({commit},data)=>{
       commit('setUserInfo',data)
+    },
+    addProduct:({dispatch},data)=>{
+      return formAPI('POST','items',data)
+    },
+    getProduct:({commit})=>{
+      API('GET','items')
+      .then(response=>{
+        console.log(response)
+        commit('setProduct',response.data.response)
+      })
     }
   }
 })
