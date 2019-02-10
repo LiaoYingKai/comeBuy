@@ -1,10 +1,12 @@
 <template lang="html">
   <div class="model" v-if="isOpen">
     <div class="modal-content">
+
+
+    <el-row :gutter="20">
       <div class="close" @click="closeAddProduct">
         <font-awesome-icon icon="times" />
       </div>
-    <el-row :gutter="20">
       <el-col :span="6" :offset="1">
         <div class="uploadImage">
           <input type="file" @change="onFileChange" ref="inputFile">
@@ -12,7 +14,7 @@
         </div>
       </el-col>
       <el-col :span="12" :offset="1">
-        <el-form label-position="left" label-width="80px" :model="productInfo" ref="productInfo">
+        <el-form label-position="left" label-width="80px" :model="productInfo" ref="productInfo" @keyup.enter="test">
           <el-form-item label="商品名稱">
             <el-input v-model="productInfo.name"></el-input>
           </el-form-item>
@@ -56,6 +58,9 @@ export default {
     }
   },
   methods: {
+    test: function(){
+      console.log("fuck")
+    },
     getProduct: function() {
       this.$store.dispatch('getProduct')
     },
@@ -70,6 +75,7 @@ export default {
       this.$store.dispatch('addProduct', data)
         .then(() => {
           this.resetProduct()
+          this.closeAddProduct()
           this.$store.dispatch('getProduct')
         })
         .catch(error => {
@@ -146,8 +152,8 @@ export default {
 }
 .close {
     position: absolute;
-    top:20px;
-    right:20px;
+    top: 0px;
+    right: 10px;
     opacity: 0.4;
     font-size: 24px;
     cursor: pointer;

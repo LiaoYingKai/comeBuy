@@ -1,6 +1,7 @@
 import store from '../store.js'
 
 export default function tokenFlow(){
+  $cookies.remove('FBtoken')
   FB.login(response=>{
     console.log(response)
     let data = {
