@@ -36,7 +36,12 @@ export default {
   props: ["productInfo"],
   methods:{
     deleteProduct:function(id){
-      console.log(id,"fuck")
+      let deleteItem = {
+        items:[]
+      }
+      deleteItem.items.push(id)
+      console.log(deleteItem)
+      this.$store.dispatch('deleteProduct',deleteItem)
     },
     aditProduct:function(){
       console.log("fuck")

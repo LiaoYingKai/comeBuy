@@ -50,14 +50,21 @@ export default new Vuex.Store({
     setUserInfo:({commit},data)=>{
       commit('setUserInfo',data)
     },
-    addProduct:({dispatch},data)=>{
-      return formAPI('POST','items',data)
+    addProduct:({dispatch},formData)=>{
+      return formAPI('POST','items',formData)
     },
     getProduct:({commit})=>{
       return API('GET','items')
       .then(response=>{
         console.log(response)
         commit('setProduct',response.data.response)
+      })
+    },
+    deleteProduct:({dispatch},deleteItem)=>{
+      API('DELETE','items',deleteItem)
+      .then(response=>{
+        console.log(response)
+        dispatch('getProduct')
       })
     }
   }
