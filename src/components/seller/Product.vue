@@ -129,17 +129,6 @@ export default {
         });
     }
   },
-  computed:{
-    token:function(){
-      return this.$store.getters.token
-    }
-  },
-  watch:{
-    token:function(newCount, oldCount){
-      console.log(newCount,oldCount)
-      this.$store.dispatch('getProduct')
-    }
-  }
 }
 </script>
 

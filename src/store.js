@@ -9,11 +9,15 @@ export default new Vuex.Store({
   state: {
     fbToken:'',
     userInfo:'',
+    userStatus:{},
     products:[]
   },
   getters:{
     token:(state)=>{
       return state.fbToken
+    },
+    userStatus:(state)=>{
+      return state.userStatus
     },
     userInfo:(state)=>{
       return state.userInfo
@@ -25,6 +29,9 @@ export default new Vuex.Store({
   mutations: {
     setToken:(state,token)=>{
       state.fbToken = token
+    },
+    setuserStatus:(state,userStatus)=>{
+      state.userStatus = userStatus
     },
     setUserInfo:(state,userInfo)=>{
       state.userInfo = userInfo
@@ -52,6 +59,13 @@ export default new Vuex.Store({
     },
     setUserInfo:({commit},data)=>{
       commit('setUserInfo',data)
+    },
+    getUserStatus:({commit})=>{
+      API('GET','user-status')
+      .then(response=>{
+        console.log(response)
+        commit('setuserStatus',response.data)
+      })
     },
     addProduct:({dispatch},formData)=>{
       return formAPI('POST','items',formData)
