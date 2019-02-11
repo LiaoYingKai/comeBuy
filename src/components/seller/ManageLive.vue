@@ -29,13 +29,19 @@
     </el-col>
     <el-col :span="10" :offset="2">
       <div class="livingProduct">
+
         <el-collapse accordion>
           <el-collapse-item v-for="product in products" :name="product.id">
             <template slot="title">
               <div class="test">
                 {{product.name}}
+                <span v-if="sellingProduct.item_id === product.id">
+                  商品推播中
+                </span>
               </div>
-            </template> {{product}}
+            </template>
+            {{product}}
+            <el-button @click="sellProduct(product.id)">測試</el-button>
           </el-collapse-item>
         </el-collapse>
       </div>
@@ -49,7 +55,7 @@
 <script>
 import LiveBroadcast from './LiveBroadcast'
 export default {
-  components:{
+  components: {
     LiveBroadcast
   },
   data() {
@@ -64,11 +70,17 @@ export default {
     getProduct: function() {
       this.$store.dispatch('getProduct')
     },
+    getSellingProduct: function() {
+      this.$store.dispatch('getSellingProduct')
+    },
     startLive: function() {
       this.$store.dispatch('startLive', this.liveInfo)
     },
     closeLive: function() {
       this.$store.dispatch('closeLive')
+    },
+    sellProduct:function(itemId){
+      this.$store.dispatch('sellProduct',itemId)
     }
   },
   computed: {
@@ -77,10 +89,14 @@ export default {
     },
     isLive: function() {
       return this.$store.getters.userStatus.result
+    },
+    sellingProduct:function(){
+      return this.$store.getters.sellingProduct
     }
   },
   mounted() {
     this.getProduct()
+    // this.getSellingProduct()
   }
 }
 </script>

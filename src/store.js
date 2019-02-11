@@ -12,6 +12,7 @@ export default new Vuex.Store({
     userStatus:{},
     products:[],
     liveInfo:{},
+    sellingProduct:{}
   },
   getters:{
     token:(state)=>{
@@ -26,12 +27,9 @@ export default new Vuex.Store({
     products:(state)=>{
       return state.products
     },
-    // channelToken:(state)=>{
-    //   return state.response.channel_token
-    // },
-    // livingURL:(state)=>{
-    //   return state.response.iFrame
-    // }
+    sellingProduct:(state)=>{
+      return state.sellingProduct
+    }
   },
   mutations: {
     setToken:(state,token)=>{
@@ -48,6 +46,9 @@ export default new Vuex.Store({
     },
     setLiveInfo:(state,liveInfo)=>{
       state.liveInfo = liveInfo
+    },
+    setSellingProduct:(state,productInfo)=>{
+      state.sellingProduct = productInfo
     }
   },
   actions: {
@@ -108,8 +109,8 @@ export default new Vuex.Store({
       API('POST','channel',liveInfo)
       .then(response=>{
         console.log(response)
-        // commit('setLiveInfo',response.data.response)
         dispatch('getUserStatus')
+        // dispatch('getSellingProduct')
       })
     },
     closeLive:({dispatch})=>{
@@ -117,6 +118,20 @@ export default new Vuex.Store({
       .then(response=>{
         console.log(response)
         dispatch('getUserStatus')
+      })
+    },
+    getSellingProduct:({commit})=>{
+      API('GET','streaming-items')
+      .then(response=>{
+        console.log(response)
+        commit('setSellingProduct',response.data.response)
+      })
+    },
+    sellProduct:({dispatch},itemId)=>{
+      API('POST',`streaming-items/${itemId}`)
+      .then(response=>{
+        console.log(response)
+        dispatch('getSellingProduct')
       })
     }
   }
