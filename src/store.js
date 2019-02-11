@@ -41,7 +41,10 @@ export default new Vuex.Store({
       API('POST','token',data)
       .then(response=>{
         dispatch('getUserInfo')
-        .then(response => dispatch('setUserInfo', response.data.response))
+        .then(response => {
+          dispatch('setUserInfo', response.data.response)
+          dispatch('getProduct')
+        })
       })
     },
     getUserInfo:({commit})=>{
