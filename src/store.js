@@ -113,11 +113,12 @@ export default new Vuex.Store({
         // dispatch('getSellingProduct')
       })
     },
-    closeLive:({dispatch})=>{
+    closeLive:({dispatch,commit})=>{
       API('PUT','users-channel-id')
       .then(response=>{
         console.log(response)
         dispatch('getUserStatus')
+        commit('setSellingProduct',{})
       })
     },
     getSellingProduct:({commit})=>{
