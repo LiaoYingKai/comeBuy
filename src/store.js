@@ -10,7 +10,8 @@ export default new Vuex.Store({
     fbToken:'',
     userInfo:'',
     userStatus:{},
-    products:[]
+    products:[],
+    liveInfo:{},
   },
   getters:{
     token:(state)=>{
@@ -24,7 +25,13 @@ export default new Vuex.Store({
     },
     products:(state)=>{
       return state.products
-    }
+    },
+    // channelToken:(state)=>{
+    //   return state.response.channel_token
+    // },
+    // livingURL:(state)=>{
+    //   return state.response.iFrame
+    // }
   },
   mutations: {
     setToken:(state,token)=>{
@@ -38,6 +45,9 @@ export default new Vuex.Store({
     },
     setProduct:(state,productList)=>{
       state.products = productList
+    },
+    setLiveInfo:(state,liveInfo)=>{
+      state.liveInfo = liveInfo
     }
   },
   actions: {
@@ -92,6 +102,21 @@ export default new Vuex.Store({
       .then(response=>{
         console.log(response)
         dispatch('getProduct')
+      })
+    },
+    startLive:({dispatch},liveInfo)=>{
+      API('POST','channel',liveInfo)
+      .then(response=>{
+        console.log(response)
+        // commit('setLiveInfo',response.data.response)
+        dispatch('getUserStatus')
+      })
+    },
+    closeLive:({dispatch})=>{
+      API('PUT','users-channel-id')
+      .then(response=>{
+        console.log(response)
+        dispatch('getUserStatus')
       })
     }
   }
