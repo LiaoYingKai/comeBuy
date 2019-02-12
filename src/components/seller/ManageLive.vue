@@ -24,23 +24,24 @@
         </el-row>
       </div>
       <el-button @click="closeLive" v-if="isLive">關閉直播</el-button>
-      <el-button @click="startLive" v-else>開始直播</el-button>
-
+      <el-button @click="startLive" v-else :disabled="products.length === 0">開始直播</el-button>
     </el-col>
     <el-col :span="10" :offset="2">
-      <div class="livingProduct">
-
+      <div class="" v-if="products.length === 0">
+        請先新增商品
+        <el-button @click="goAddProduct">前往新增商品</el-button>
+      </div>
+      <div class="livingProduct" v-else>
         <el-collapse accordion>
           <el-collapse-item v-for="product in products" :name="product.id">
             <template slot="title">
-              <div class="test">
+              <div class="title">
                 {{product.name}}
                 <span v-if="sellingProduct.item_id === product.id">
                   商品推播中
                 </span>
               </div>
-            </template>
-            {{product}}
+            </template> {{product}}
             <el-button @click="sellProduct(product.id)">測試</el-button>
           </el-collapse-item>
         </el-collapse>
@@ -75,12 +76,17 @@ export default {
     },
     startLive: function() {
       this.$store.dispatch('startLive', this.liveInfo)
+      this.liveInfo.iFrame = ''
+      this.liveInfo.channel_description = ''
     },
     closeLive: function() {
       this.$store.dispatch('closeLive')
     },
-    sellProduct:function(itemId){
-      this.$store.dispatch('sellProduct',itemId)
+    sellProduct: function(itemId) {
+      this.$store.dispatch('sellProduct', itemId)
+    },
+    goAddProduct: function(){
+      this.$router.push('product')
     }
   },
   computed: {
@@ -90,7 +96,7 @@ export default {
     isLive: function() {
       return this.$store.getters.userStatus.result
     },
-    sellingProduct:function(){
+    sellingProduct: function() {
       return this.$store.getters.sellingProduct
     }
   },
@@ -102,8 +108,12 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-.test {
-    font-size: 24px;
+.title {
+    font-size: 20px;
+    margin-left: 10px;
+    span{
+      color: red;
+    }
 }
 
 button {
