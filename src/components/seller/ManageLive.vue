@@ -41,8 +41,27 @@
                   商品推播中
                 </span>
               </div>
-            </template> {{product}}
-            <el-button @click="sellProduct(product.id)">測試</el-button>
+            </template>
+            <el-row>
+              <el-col :span="10" :offset="1">
+                <img :src="product.images" alt="">
+              </el-col>
+              <el-col :span="10" :offset="2" class="productStyle">
+                <div class="">
+                  商品描述：{{product.description}}
+                </div>
+                <div class="">
+                  商品數量：{{product.stock}}
+                </div>
+                <div class="">
+                  商品成本：{{product.cost}}
+                </div>
+                <div class="">
+                  商品售價：{{product.unit_price}}
+                </div>
+                </el-col>
+            </el-row>
+            <el-button @click="sellProduct(product.id)">商品推播</el-button>
           </el-collapse-item>
         </el-collapse>
       </div>
@@ -85,7 +104,7 @@ export default {
     sellProduct: function(itemId) {
       this.$store.dispatch('sellProduct', itemId)
     },
-    goAddProduct: function(){
+    goAddProduct: function() {
       this.$router.push('product')
     }
   },
@@ -111,12 +130,21 @@ export default {
 .title {
     font-size: 20px;
     margin-left: 10px;
-    span{
-      color: red;
+    span {
+        color: red;
     }
 }
 
 button {
     margin-top: 10px;
+}
+img{
+  width: 100%;
+  height:auto;
+}
+.productStyle{
+  div{
+    text-align: left;
+  }
 }
 </style>
