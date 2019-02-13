@@ -6,7 +6,7 @@ import ManageLive from './components/seller/ManageLive.vue'
 import Products from './components/seller/Products.vue'
 import Order from './components/seller/Order.vue'
 import WatchLive from './components/buyer/WatchLive.vue'
-import UserInfo from './components/buyer/UserInfo.vue'
+import RecipientsInfo from './components/buyer/RecipientsInfo.vue'
 import ShoppingCart from './components/buyer/ShoppingCart.vue'
 
 Vue.use(Router)
@@ -34,8 +34,8 @@ export default new Router({
       path: 'watchRoom',
       component: WatchLive
     },{
-      path: 'userInfo',
-      component: UserInfo
+      path: 'RecipientsInfo',
+      component: RecipientsInfo
     },{
       path: 'shoppingCart',
       component: ShoppingCart

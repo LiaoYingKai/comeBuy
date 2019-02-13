@@ -12,7 +12,10 @@ export default new Vuex.Store({
     userStatus:{},
     products:[],
     liveInfo:{},
-    sellingProduct:{}
+    sellingProduct:{},
+    recipientsInfo:{},
+    taiwanPostcode:[],
+    countryCode:[]
   },
   getters:{
     token:(state)=>{
@@ -29,6 +32,15 @@ export default new Vuex.Store({
     },
     sellingProduct:(state)=>{
       return state.sellingProduct
+    },
+    recipientsInfo:(state)=>{
+      return state.recipientsInfo
+    },
+    taiwanPostcode:(state)=>{
+      return state.taiwanPostcode
+    },
+    countryCode:(state)=>{
+      return state.countryCode
     }
   },
   mutations: {
@@ -49,6 +61,15 @@ export default new Vuex.Store({
     },
     setSellingProduct:(state,productInfo)=>{
       state.sellingProduct = productInfo
+    },
+    setRecipientsInfo:(state,recipientsInfo)=>{
+      state.recipientsInfo = recipientsInfo
+    },
+    setTaiwanPostcode:(state,taiwanPostcode)=>{
+      state.taiwanPostcode = taiwanPostcode
+    },
+    setCountryCode:(state,countryCode)=>{
+      state.countryCode = countryCode
     }
   },
   actions: {
@@ -133,6 +154,27 @@ export default new Vuex.Store({
       .then(response=>{
         console.log(response)
         dispatch('getSellingProduct')
+      })
+    },
+    getRecipientsInfo:({commit})=>{
+      API('GET','recipients')
+      .then(response=>{
+        console.log(response)
+        commit('setRecipientsInfo',response.data.response)
+      })
+    },
+    getTaiwanPostcode:({commit})=>{
+      API('GET','taiwan-post-code')
+      .then(response=>{
+        console.log(response)
+        commit('setTaiwanPostcode',response.data.response)
+      })
+    },
+    getCountryCode:({commit})=>{
+      API('GET','country-code')
+      .then(response=>{
+        console.log(response)
+        commit('setCountryCode',response.data.response)
       })
     }
   }

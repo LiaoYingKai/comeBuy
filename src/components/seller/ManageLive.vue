@@ -33,7 +33,7 @@
       </div>
       <div class="livingProduct" v-else>
         <el-collapse accordion>
-          <el-collapse-item v-for="product in products" :name="product.id">
+          <el-collapse-item v-for="product in products" :name="product.id" :key="product.id">
             <template slot="title">
               <div class="title">
                 {{product.name}}
