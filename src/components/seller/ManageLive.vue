@@ -95,8 +95,7 @@ export default {
     },
     startLive: function() {
       this.$store.dispatch('startLive', this.liveInfo)
-      this.liveInfo.iFrame = ''
-      this.liveInfo.channel_description = ''
+
     },
     closeLive: function() {
       this.$store.dispatch('closeLive')

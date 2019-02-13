@@ -1,5 +1,11 @@
 <template>
 <div class="">
+  <div class="">
+    直播房號：{{channel_token}}
+  </div>
+  <div class="">
+    直播描述：{{channel_description}}
+  </div>
   <div class="fb-video" :data-href="url" data-allowfullscreen="true" data-width="500"></div>
 </div>
 </template>
@@ -27,6 +33,12 @@ export default {
   computed: {
     userStatus: function() {
       return this.$store.getters.userStatus
+    },
+    channel_description:function(){
+      return this.userStatus.response.channel_description
+    },
+    channel_token:function(){
+      return this.userStatus.response.channel_token
     }
   },
   watch:{
