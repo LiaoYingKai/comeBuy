@@ -7,8 +7,8 @@
       </el-col>
       <el-col :span="14">
         <div class="">
-          <el-menu mode="horizontal" :router="true">
-            <el-submenu index="1">
+          <el-menu mode="horizontal" :router="true" >
+            <el-submenu index="1" :disabled="!!isLive">
               <template slot="title">買家</template>
               <el-menu-item index="watchRoom">觀看直播</el-menu-item>
               <el-menu-item index="RecipientsInfo">更新個人資訊</el-menu-item>
@@ -62,6 +62,9 @@ export default {
     },
     name: function() {
       return this.$store.getters.userInfo.name
+    },
+    isLive: function(){
+      return this.$store.getters.userStatus.result?this.$store.getters.userStatus.response.host:this.$store.getters.userStatus.result
     }
   }
 }

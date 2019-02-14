@@ -95,7 +95,6 @@ export default {
     },
     startLive: function() {
       this.$store.dispatch('startLive', this.liveInfo)
-
     },
     closeLive: function() {
       this.$store.dispatch('closeLive')

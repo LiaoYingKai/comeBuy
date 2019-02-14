@@ -15,7 +15,8 @@ export default new Vuex.Store({
     sellingProduct:{},
     recipientsInfo:{},
     taiwanPostcode:[],
-    countryCode:[]
+    countryCode:[],
+    channelURL:''
   },
   getters:{
     token:(state)=>{
@@ -41,6 +42,9 @@ export default new Vuex.Store({
     },
     countryCode:(state)=>{
       return state.countryCode
+    },
+    getChannelURL:(state)=>{
+      return state.channelURL
     }
   },
   mutations: {
@@ -70,6 +74,9 @@ export default new Vuex.Store({
     },
     setCountryCode:(state,countryCode)=>{
       state.countryCode = countryCode
+    },
+    setChannelURL:(state,channelURL)=>{
+      state.channelURL = channelURL
     }
   },
   actions: {
@@ -175,6 +182,23 @@ export default new Vuex.Store({
       .then(response=>{
         console.log(response)
         commit('setCountryCode',response.data.response)
+      })
+    },
+    joinChannel:({commit,dispatch},data)=>{
+      API('PATCH','user-channel-id',data)
+      .then(response=>{
+        console.log(response)
+        commit('setChannelURL',response.data.response)
+        dispatch('getUserStatus')
+      })
+    },
+    leaveCahnnel:({commit,dispatch})=>{
+      API('PUT','user-channel-id')
+      .then(response=>{
+        console.log(response)
+        commit('setChannelURL','')
+        dispatch('getUserStatus')
+
       })
     }
   }
