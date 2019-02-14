@@ -14,6 +14,7 @@
   <div class="">輸入其他</div>
   <el-input v-model="recipients.address.others"  placeholder="請輸入內容" ></el-input>
   {{recipients}}
+  <el-button @click="addRecipients">  新增收件人</el-button>
 </div>
 </template>
 
@@ -71,7 +72,7 @@ export default {
       cb(renderArray);
     },
     countrySelector: function(item) {
-      this.recipients.phone.phone_code = item.phone_code
+      this.recipients.phone.phone_code = String(item.phone_code)
       this.recipients.address.country_code =item.country_code
     },
     handleSelect: function(){
@@ -82,6 +83,10 @@ export default {
           }
         })
       }
+    },
+    addRecipients:function(){
+      this.recipients.name = this.userInfo.name
+      this.$store.dispatch('addRecipients',this.recipients)
     }
   },
   computed: {

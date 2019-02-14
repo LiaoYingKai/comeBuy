@@ -164,6 +164,14 @@ export default new Vuex.Store({
         dispatch('getSellingProduct')
       })
     },
+    addRecipients:({dispatch},recipients)=>{
+      console.log(recipients)
+      API('POST','recipients',recipients)
+      .then(response=>{
+        console.log(response)
+        dispatch('getRecipientsInfo')
+      })
+    },
     getRecipientsInfo:({commit})=>{
       API('GET','recipients')
       .then(response=>{
