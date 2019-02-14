@@ -1,7 +1,7 @@
 <template >
 <div class="modal" v-if="isOpen">
   <div class="modal-content">
-    <div class="close" @click="closeAddProduct">
+    <div class="close" @click="closeAddRecipient">
       <font-awesome-icon icon="times" />
     </div>
     <div class="">輸入姓名</div>
@@ -16,7 +16,6 @@
     <el-autocomplete v-model="recipients.address.district" :fetch-suggestions="addressSearch" placeholder="請輸入內容" :trigger-on-focus="false" @select="zipCodeSelector"></el-autocomplete>
     <div class="">輸入其他</div>
     <el-input v-model="recipients.address.others" placeholder="請輸入內容"></el-input>
-    {{recipients}}
     <el-button @click="addRecipients"> 新增收件人</el-button>
   </div>
 
@@ -25,7 +24,7 @@
 
 <script>
 export default {
-  props:['isOpen'],
+  props: ['isOpen'],
   data() {
     return {
       recipients: {
@@ -46,7 +45,7 @@ export default {
     }
   },
   methods: {
-    closeAddProduct: function() {
+    closeAddRecipient: function() {
       this.$emit('closeAddRecipient')
     },
     getTaiwanPostcode: function() {
@@ -92,6 +91,7 @@ export default {
     },
     addRecipients: function() {
       this.$store.dispatch('addRecipients', this.recipients)
+      this.closeAddRecipient()
     }
   },
   computed: {
@@ -115,13 +115,14 @@ export default {
 
 <style lang="scss" scoped>
 @import '../../scss/mixin';
-.modal{
-  @include modal();
+.modal {
+    @include modal();
+
 }
 .close {
     position: absolute;
-    top: 0;
-    right: 10px;
+    top: 20;
+    right: 20px;
     opacity: 0.4;
     font-size: 24px;
     cursor: pointer;

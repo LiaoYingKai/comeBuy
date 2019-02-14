@@ -1,8 +1,12 @@
 <template>
 <div class="">
+  <div class="" v-for="recipient in recipientsInfo">
+    {{recipient}}
+    <el-button @click="deleteRecipient(recipient.recipient_id)"> 刪除收件人 </el-button>
+  </div>
+  {{userInfo}}
   <AddRecipient :isOpen="isOpen" @closeAddRecipient="closeAddRecipient"/>
   <el-button @click="openAddRecipient">新增收件人地址</el-button>
-  {{recipientsInfo}}
 </div>
 </template>
 
@@ -26,6 +30,9 @@ export default {
     },
     closeAddRecipient: function(){
       this.isOpen = false
+    },
+    deleteRecipient: function(recipient_id){
+      this.$store.dispatch('deleteRecipient',{recipients:[recipient_id]})
     }
   },
   computed: {

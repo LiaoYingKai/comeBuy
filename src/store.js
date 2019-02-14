@@ -171,7 +171,7 @@ export default new Vuex.Store({
         dispatch('getRecipientsInfo')
       })
     },
-    deleteRecipients:({dispatch},recipientsId)=>{
+    deleteRecipient:({dispatch},recipientsId)=>{
         API('DELETE','recipients',recipientsId)
         .then(response=>{
           console.log(response)
@@ -179,7 +179,7 @@ export default new Vuex.Store({
         })
     },
     editRecipients:({dispatch})=>{
-      
+
     },
     getRecipientsInfo:({commit})=>{
       API('GET','recipients')
