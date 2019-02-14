@@ -15,8 +15,8 @@ export default new Vuex.Store({
     sellingProduct:{},
     recipientsInfo:{},
     taiwanPostcode:[],
+    taiwanCity:[],
     countryCode:[],
-    channelURL:''
   },
   getters:{
     token:(state)=>{
@@ -40,12 +40,12 @@ export default new Vuex.Store({
     taiwanPostcode:(state)=>{
       return state.taiwanPostcode
     },
+    taiwanCity:(state)=>{
+      return state.taiwanCity
+    },
     countryCode:(state)=>{
       return state.countryCode
     },
-    getChannelURL:(state)=>{
-      return state.channelURL
-    }
   },
   mutations: {
     setToken:(state,token)=>{
@@ -72,12 +72,13 @@ export default new Vuex.Store({
     setTaiwanPostcode:(state,taiwanPostcode)=>{
       state.taiwanPostcode = taiwanPostcode
     },
+    setTaiwanCity:(state,taiwanCity)=>{
+      state.taiwanCity = taiwanCity
+    },
     setCountryCode:(state,countryCode)=>{
       state.countryCode = countryCode
     },
-    setChannelURL:(state,channelURL)=>{
-      state.channelURL = channelURL
-    }
+
   },
   actions: {
     getToken:({commit})=>{
@@ -174,7 +175,14 @@ export default new Vuex.Store({
       API('GET','taiwan-post-code')
       .then(response=>{
         console.log(response)
-        commit('setTaiwanPostcode',response.data.response)
+        let responseArray= response.data.response
+        let cityArray = responseArray.map(item=>{
+          //這邊要將重複的篩選掉
+          return {value:item.City}
+        })
+
+        commit('setTaiwanPostcode',responseArray)
+        commit('setTaiwanCity',cityArray)
       })
     },
     getCountryCode:({commit})=>{
@@ -188,7 +196,6 @@ export default new Vuex.Store({
       API('PATCH','user-channel-id',data)
       .then(response=>{
         console.log(response)
-        commit('setChannelURL',response.data.response)
         dispatch('getUserStatus')
       })
     },
@@ -196,7 +203,6 @@ export default new Vuex.Store({
       API('PUT','user-channel-id')
       .then(response=>{
         console.log(response)
-        commit('setChannelURL','')
         dispatch('getUserStatus')
       })
     }
