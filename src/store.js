@@ -165,12 +165,21 @@ export default new Vuex.Store({
       })
     },
     addRecipients:({dispatch},recipients)=>{
-      console.log(recipients)
       API('POST','recipients',recipients)
       .then(response=>{
         console.log(response)
         dispatch('getRecipientsInfo')
       })
+    },
+    deleteRecipients:({dispatch},recipientsId)=>{
+        API('DELETE','recipients',recipientsId)
+        .then(response=>{
+          console.log(response)
+          dispatch('getRecipientsInfo')
+        })
+    },
+    editRecipients:({dispatch})=>{
+      
     },
     getRecipientsInfo:({commit})=>{
       API('GET','recipients')

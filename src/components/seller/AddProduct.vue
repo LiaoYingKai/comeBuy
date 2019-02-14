@@ -1,5 +1,5 @@
 <template lang="html">
-  <div class="model" v-if="isOpen">
+  <div class="modal" v-if="isOpen">
     <div class="modal-content">
     <el-row :gutter="20">
       <div class="close" @click="closeAddProduct">
@@ -165,24 +165,10 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-.model {
-    position: fixed;
-    z-index: 1;
-    padding-top: 100px;
-    left: 0;
-    top: 0;
-    width: 100%;
-    height: 100%;
-    overflow: auto;
-    background-color: rgba(0,0,0,0.4);
-}
-.modal-content {
-    position: relative;
-    background-color: #fefefe;
-    margin: auto;
-    padding: 20px;
-    border: 1px solid #888;
-    max-width: 960px;
+@import '../../scss/mixin';
+
+.modal{
+  @include modal();
 }
 .uploadImage {
     height: 372px;

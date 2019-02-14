@@ -11,7 +11,7 @@
             <el-submenu index="1" :disabled="!!isLive">
               <template slot="title">買家</template>
               <el-menu-item index="watchRoom">觀看直播</el-menu-item>
-              <el-menu-item index="RecipientsInfo">更新個人資訊</el-menu-item>
+              <el-menu-item index="RecipientsInfo">個人資訊</el-menu-item>
               <el-menu-item index="ShoppingCart">查看訂單</el-menu-item>
             </el-submenu>
             <el-submenu index="2">
