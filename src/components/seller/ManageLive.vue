@@ -73,7 +73,7 @@
 </template>
 
 <script>
-import LiveBroadcast from './LiveBroadcast'
+import LiveBroadcast from '../common/LiveBroadcast'
 export default {
   components: {
     LiveBroadcast

@@ -1,5 +1,6 @@
 <template >
 <div class="">
+  {{sellingProduct}}
   <LiveBroadcast v-if="isLive" />
   <el-input v-model="channel.channel_token" placeholder="輸入直播房號" v-else></el-input>
   <el-button @click="leaveChannel" v-if="isLive">離開直播</el-button>
@@ -8,7 +9,7 @@
 </template>
 
 <script>
-import LiveBroadcast from '../seller/LiveBroadcast'
+import LiveBroadcast from '../common/LiveBroadcast'
 export default {
   components: {
     LiveBroadcast
@@ -27,11 +28,20 @@ export default {
     leaveChannel: function() {
       this.$store.dispatch('leaveCahnnel')
     },
+    getSellingProduct: function() {
+      this.$store.dispatch('getSellingProduct')
+    },
   },
   computed: {
     isLive: function() {
       return this.$store.getters.userStatus.result
+    },
+    sellingProduct: function(){
+      return this.$store.getters.sellingProduct
     }
+  },
+  mounted(){
+    // this.getSellingProduct()
   }
 }
 </script>

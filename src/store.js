@@ -198,7 +198,6 @@ export default new Vuex.Store({
         console.log(response)
         commit('setChannelURL','')
         dispatch('getUserStatus')
-
       })
     }
   }
