@@ -91,6 +91,7 @@ export default new Vuex.Store({
         .then(response => {
           dispatch('setUserInfo', response.data.response)
           dispatch('getProduct')
+          dispatch('getUserStatus')
         })
       })
     },
