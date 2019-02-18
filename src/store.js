@@ -244,10 +244,11 @@ export default new Vuex.Store({
         dispatch('getUserStatus')
       })
     },
-    putIntoShoppingCart:({},shoppingCartInfo)=>{
+    putIntoShoppingCart:({dispatch},shoppingCartInfo)=>{
       API('POST',`orders/${shoppingCartInfo.itemId}/${shoppingCartInfo.recipientId}`,{number:shoppingCartInfo.number})
       .then(response=>{
         console.log(response)
+        dispatch('getSellingProduct')
       })
     },
     getShoppingCart:({commit})=>{
@@ -262,6 +263,14 @@ export default new Vuex.Store({
       .then(response=>{
         console.log(response)
         commit('setThirdPay',response.data.response)
+      })
+    },
+    payingPayment:({},paymentInfo)=>{
+      // console.log(paymentInfo)
+      API('POST',`payments/${paymentInfo.thirdPayId}`,paymentInfo.payment)
+      .then(response=>{
+        // window.open(response.data.response)
+        console.log(response)
       })
     }
   }

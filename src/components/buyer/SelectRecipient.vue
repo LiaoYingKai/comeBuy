@@ -19,12 +19,16 @@ export default {
     }
   },
   methods: {
-    cancelAdd: function() {
+    close: function(){
       this.$emit('cancelAdd')
+    },
+    cancelAdd: function() {
+      this.close()
     },
     addIntoShoppingCart: function() {
       this.shoppingCartInfo.recipientId = this.recipientId
       this.$store.dispatch('putIntoShoppingCart',this.shoppingCartInfo)
+      this.close()
     }
   },
   computed: {

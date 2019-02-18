@@ -3,6 +3,7 @@
     購物車
     <div class="">
       {{shoppingCarts}}
+      <el-button @click="pay"> 付款 </el-button>
     </div>
     <div class="">
       {{thirdPay}}
@@ -18,6 +19,17 @@ export default {
     },
     getThirdPay:function(){
       this.$store.dispatch('getThirdPay')
+    },
+    pay:function(){
+      let paymentInfo = {}
+      paymentInfo.thirdPayId = 2
+      paymentInfo.payment={
+        order_id:[this.shoppingCarts[0].id],
+        ClintBackURL:"http://localhost:8080/mainPage/ShoppingCart",
+        source: "mobile"
+      }
+      // console.log(paymentInfo)
+      this.$store.dispatch('payingPayment',paymentInfo)
     }
   },
   computed:{
