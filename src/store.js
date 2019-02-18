@@ -17,7 +17,8 @@ export default new Vuex.Store({
     taiwanPostcode:[],
     taiwanCity:[],
     countryCode:[],
-    shoppingCarts:[]
+    shoppingCarts:[],
+    thirdPay:[]
   },
   getters:{
     token:(state)=>{
@@ -49,6 +50,9 @@ export default new Vuex.Store({
     },
     shoppingCarts:(state)=>{
       return state.shoppingCarts
+    },
+    thirdPay:(state)=>{
+      return state.thirdPay
     }
   },
   mutations: {
@@ -84,6 +88,9 @@ export default new Vuex.Store({
     },
     setShoppingCart:(state,shoppingCarts)=>{
       state.shoppingCarts = shoppingCarts
+    },
+    setThirdPay:(state,thirdPay)=>{
+      state.thirdPay = thirdPay
     }
   },
   actions: {
@@ -248,6 +255,13 @@ export default new Vuex.Store({
       .then(response=>{
         console.log(response)
         commit('setShoppingCart',response.data.response)
+      })
+    },
+    getThirdPay:({commit})=>{
+      API('GET','payment-services')
+      .then(response=>{
+        console.log(response)
+        commit('setThirdPay',response.data.response)
       })
     }
   }
