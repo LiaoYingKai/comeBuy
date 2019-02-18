@@ -6,7 +6,6 @@
     </div>
     <el-button @click="cancelAdd">取消</el-button>
     <el-button @click="addIntoShoppingCart">加入購物車</el-button>
-    {{shoppingCartInfo}}
   </div>
 </div>
 </template>
