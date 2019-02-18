@@ -230,6 +230,12 @@ export default new Vuex.Store({
         console.log(response)
         dispatch('getUserStatus')
       })
+    },
+    putIntoShoppingCart:({},shoppingCartInfo)=>{
+      API('POST',`orders/${shoppingCartInfo.itemId}/${shoppingCartInfo.recipientId}`,{number:shoppingCartInfo.number})
+      .then(response=>{
+        console.log(response)
+      })
     }
   }
 })

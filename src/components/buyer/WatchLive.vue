@@ -28,24 +28,33 @@
             </div>
           </el-col>
         </el-row>
+        <el-input-number v-model="shoppingCartInfo.number" :min="1"></el-input-number>
         <el-button @click="putIntoShoppingCart(sellingProduct.item_id)">放入購物車</el-button>
       </div>
+      <SelectRecipient v-if="isSelect" @cancelAdd="closeSelect" :shoppingCartInfo="shoppingCartInfo"/>
     </el-col>
   </el-row>
-
 </div>
 </template>
 
 <script>
 import LiveBroadcast from '../common/LiveBroadcast'
+import SelectRecipient from './SelectRecipient'
 export default {
   components: {
-    LiveBroadcast
+    LiveBroadcast,
+    SelectRecipient
   },
   data() {
     return {
       channel: {
         channel_token: ''
+      },
+      isSelect:false,
+      shoppingCartInfo:{
+        itemId:'',
+        recipientId:'',
+        number:''
       }
     }
   },
@@ -59,8 +68,20 @@ export default {
     getSellingProduct: function() {
       this.$store.dispatch('getSellingProduct')
     },
-    putIntoShoppingCart:function(id){
-      console.log(id)
+    putIntoShoppingCart: function(id) {
+      this.shoppingCartInfo.itemId = id
+      console.log(this.shoppingCartInfo)
+      this.openSelect()
+    },
+    getRecipientsInfo: function(){
+      this.$store.dispatch('getRecipientsInfo')
+    },
+    openSelect: function(){
+      this.isSelect = true
+    },
+    closeSelect: function(){
+      this.isSelect = false
+
     }
   },
   computed: {
@@ -75,19 +96,20 @@ export default {
     }
   },
   mounted() {
+    this.getRecipientsInfo()
+
   }
 }
 </script>
 <style lang="scss" scoped>
-
-  img{
+img {
     width: 100%;
-    height:auto;
-  }
-.productStyle{
+    height: auto;
+}
+.productStyle {
 
-  div{
-    text-align: left;
-  }
+    div {
+        text-align: left;
+    }
 }
 </style>

@@ -2,7 +2,7 @@
 <div class="">
   <el-row type="flex">
     <el-col :span="10" :offset="1">
-      <div class="liveRoom" v-if="isLive">
+      <div class="liveRoom" v-if="isLive && (isSeller === 1)">
         <LiveBroadcast/>
       </div>
       <div class="startLive" v-else>
@@ -113,13 +113,15 @@ export default {
     isLive: function() {
       return this.$store.getters.userStatus.result
     },
+    isSeller: function(){
+      return this.$store.getters.userStatus.response.host
+    },
     sellingProduct: function() {
       return this.$store.getters.sellingProduct
     }
   },
   mounted() {
     this.getProduct()
-    // this.getSellingProduct()
   }
 }
 </script>
