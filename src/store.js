@@ -17,6 +17,7 @@ export default new Vuex.Store({
     taiwanPostcode:[],
     taiwanCity:[],
     countryCode:[],
+    shoppingCarts:[]
   },
   getters:{
     token:(state)=>{
@@ -46,6 +47,9 @@ export default new Vuex.Store({
     countryCode:(state)=>{
       return state.countryCode
     },
+    shoppingCarts:(state)=>{
+      return state.shoppingCarts
+    }
   },
   mutations: {
     setToken:(state,token)=>{
@@ -78,7 +82,9 @@ export default new Vuex.Store({
     setCountryCode:(state,countryCode)=>{
       state.countryCode = countryCode
     },
-
+    setShoppingCart:(state,shoppingCarts)=>{
+      state.shoppingCarts = shoppingCarts
+    }
   },
   actions: {
     getToken:({commit})=>{
@@ -235,6 +241,13 @@ export default new Vuex.Store({
       API('POST',`orders/${shoppingCartInfo.itemId}/${shoppingCartInfo.recipientId}`,{number:shoppingCartInfo.number})
       .then(response=>{
         console.log(response)
+      })
+    },
+    getShoppingCart:({commit})=>{
+      API('GET','orders')
+      .then(response=>{
+        console.log(response)
+        commit('setShoppingCart',response.data.response)
       })
     }
   }
