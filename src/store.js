@@ -51,7 +51,7 @@ export default new Vuex.Store({
     setToken:(state,token)=>{
       state.fbToken = token
     },
-    setuserStatus:(state,userStatus)=>{
+    setUserStatus:(state,userStatus)=>{
       state.userStatus = userStatus
     },
     setUserInfo:(state,userInfo)=>{
@@ -101,11 +101,14 @@ export default new Vuex.Store({
     setUserInfo:({commit},data)=>{
       commit('setUserInfo',data)
     },
-    getUserStatus:({commit})=>{
+    getUserStatus:({commit,dispatch})=>{
       API('GET','user-status')
       .then(response=>{
         console.log(response)
-        commit('setuserStatus',response.data)
+        commit('setUserStatus',response.data)
+        if(response.data.result){
+          dispatch('getSellingProduct')
+        }
       })
     },
     addProduct:({dispatch},formData)=>{
@@ -140,7 +143,7 @@ export default new Vuex.Store({
       .then(response=>{
         console.log(response)
         dispatch('getUserStatus')
-        // dispatch('getSellingProduct')
+        dispatch('getSellingProduct')
       })
     },
     closeLive:({dispatch,commit})=>{
@@ -156,6 +159,10 @@ export default new Vuex.Store({
       .then(response=>{
         console.log(response)
         commit('setSellingProduct',response.data.response)
+      })
+      .catch(err=>{
+        console.log(err)
+        commit('setSellingProduct',{})
       })
     },
     sellProduct:({dispatch},itemId)=>{
