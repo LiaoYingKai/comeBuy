@@ -13,7 +13,6 @@
     購買時間：{{shoppingCart.time}} 三天後截止
   </div>
   <div class="">
-    是否有效{{shoppingCart.effective}} 是否付款{{shoppingCart.status}}
   </div>
 </div>
 </template>
