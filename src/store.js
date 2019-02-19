@@ -266,10 +266,11 @@ export default new Vuex.Store({
       })
     },
     payingPayment:({},paymentInfo)=>{
-      // console.log(paymentInfo)
+      console.log(paymentInfo.payment)
+      console.log(paymentInfo.payment.order_id)
       API('POST',`payments/${paymentInfo.thirdPayId}`,paymentInfo.payment)
       .then(response=>{
-        // window.open(response.data.response)
+        window.open(response.data.response)
         console.log(response)
       })
     }
