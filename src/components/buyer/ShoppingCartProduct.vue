@@ -9,10 +9,12 @@
   <div class="">
     購買數量：{{shoppingCart.quantity}}
   </div>
-  <div class="">
-    購買時間：{{shoppingCart.time}} 三天後截止
+  <div class="" v-if="shoppingCart.status">
+    已結帳
   </div>
-  <div class="">
+  <div class="" v-else>
+    購買時間：{{shoppingCart.time}} 三天後截止
+
   </div>
 </div>
 </template>

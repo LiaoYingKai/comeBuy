@@ -7,8 +7,8 @@
   </el-tabs>
   <div class="">
     <el-row :gutter="20" v-for="shoppingCart in shoppingCartList">
-      <el-col :span="1" :offset="1">
-        <input type="checkbox" :id="shoppingCart.id" :value="shoppingCart.id" v-model="checkList">
+      <el-col :span="1" :offset="1" v-if="activeName == 'unchecked'">
+        <input type="checkbox" :id="shoppingCart.id" :value="shoppingCart.id" v-model="paymentInfo.payment.order_id">
         <label :for="shoppingCart.id"></label>
       </el-col>
       <el-col :span="6">
@@ -18,10 +18,17 @@
         <ShoppingCartProduct :shoppingCart="shoppingCart" />
       </el-col>
     </el-row>
-    <el-button @click="pay"> 付款 </el-button>
+    <el-button  @click="openPay" v-if="activeName == 'unchecked'" :disabled="!shoppingCartList.length"> 付款 </el-button>
   </div>
-  <div class="">
-    {{thirdPay}}
+  <div class="modal" v-if="isPay">
+    <div class="modal-content">
+      <p>選擇付款方式</p>
+      <el-radio v-model="paymentInfo.thirdPayId" :label="payMethod.id" v-for="payMethod in thirdPay">{{payMethod.name}}</el-radio>
+      <div class="">
+        <el-button @click="cancelPay"> 取消付款 </el-button>
+        <el-button @click="pay"> 付款 </el-button>
+      </div>
+    </div>
   </div>
 </div>
 </template>
@@ -34,9 +41,17 @@ export default {
   },
   data() {
     return {
-      checkList: [],
       activeName: 'unchecked',
-      shoppingCartList:[]
+      shoppingCartList: [],
+      isPay: false,
+      paymentInfo:{
+        thirdPayId:'',
+        payment:{
+          order_id: [],
+          ClintBackURL: "http://localhost:8080/mainPage/ShoppingCart",
+          source: "mobile"
+        }
+      }
     }
   },
   methods: {
@@ -47,33 +62,37 @@ export default {
       this.$store.dispatch('getThirdPay')
     },
     pay: function() {
-      let paymentInfo = {}
-      paymentInfo.thirdPayId = 2
-      paymentInfo.payment = {
-        order_id: this.checkList,
-        ClintBackURL: "http://localhost:8080/mainPage/ShoppingCart",
-        source: "mobile"
-      }
+      console.log(this.paymentInfo)
+      this.closePay()
       this.$store.dispatch('payingPayment', paymentInfo)
     },
     filterShoppingCart: function() {
-      if(this.activeName === "unchecked"){
-        let array = this.shoppingCarts.filter(item=>{
-          if(!item.status){
+      if (this.activeName === "unchecked") {
+        let array = this.shoppingCarts.filter(item => {
+          if (!item.status) {
             return item
           }
         })
         this.shoppingCartList = array
-      }else if(this.activeName === "checked"){
-        let array = this.shoppingCarts.filter(item=>{
-          if(item.status){
+      } else if (this.activeName === "checked") {
+        let array = this.shoppingCarts.filter(item => {
+          if (item.status) {
             return item
           }
         })
         this.shoppingCartList = array
-      }else{
+      } else {
         this.shoppingCartList = this.shoppingCarts
       }
+    },
+    openPay:function(){
+      this.isPay = true
+    },
+    closePay:function(){
+      this.isPay = false
+    },
+    cancelPay:function(){
+      this.closePay()
     }
   },
   computed: {
@@ -84,8 +103,8 @@ export default {
       return this.$store.getters.thirdPay
     }
   },
-  watch:{
-    shoppingCarts:function(){
+  watch: {
+    shoppingCarts: function() {
       this.filterShoppingCart()
     }
   },
@@ -97,8 +116,13 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+@import '../../scss/mixin';
+
 img {
     width: 100%;
     height: auto;
+}
+.modal {
+    @include modal();
 }
 </style>
