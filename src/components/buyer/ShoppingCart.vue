@@ -22,7 +22,8 @@
   </div>
   <div class="modal" v-if="isPay">
     <div class="modal-content">
-      <p>選擇付款方式</p>
+      <h3>選擇付款方式</h3>
+      <p>總金額：${{totalPay}}</p>
       <el-radio v-model="paymentInfo.thirdPayId" :label="payMethod.id" v-for="payMethod in thirdPay">{{payMethod.name}}</el-radio>
       <div class="">
         <el-button @click="cancelPay"> 取消付款 </el-button>
@@ -101,6 +102,15 @@ export default {
     },
     thirdPay: function() {
       return this.$store.getters.thirdPay
+    },
+    totalPay: function(){
+      let total = 0
+      this.shoppingCarts.forEach(item=>{
+        if(this.paymentInfo.payment.order_id.indexOf(item.id) >= 0){
+          total += item.quantity* item.unit_price
+        }
+      })
+      return total
     }
   },
   watch: {
@@ -117,7 +127,9 @@ export default {
 
 <style lang="scss" scoped>
 @import '../../scss/mixin';
-
+h3{
+  margin: 5px;
+}
 img {
     width: 100%;
     height: auto;
