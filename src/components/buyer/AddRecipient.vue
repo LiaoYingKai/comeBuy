@@ -95,7 +95,6 @@ export default {
     }
   },
   computed: {
-
     taiwanPostcodeList: function() {
       return this.$store.getters.taiwanPostcode
     },

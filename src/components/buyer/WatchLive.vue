@@ -73,15 +73,11 @@ export default {
       console.log(this.shoppingCartInfo)
       this.openSelect()
     },
-    getRecipientsInfo: function(){
-      this.$store.dispatch('getRecipientsInfo')
-    },
     openSelect: function(){
       this.isSelect = true
     },
     closeSelect: function(){
       this.isSelect = false
-
     }
   },
   computed: {
@@ -95,10 +91,6 @@ export default {
       return this.$store.getters.userStatus
     }
   },
-  mounted() {
-    this.getRecipientsInfo()
-
-  }
 }
 </script>
 <style lang="scss" scoped>

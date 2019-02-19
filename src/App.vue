@@ -12,13 +12,6 @@ export default {
     getUserInfo: function() {
       if (this.$store.getters.token) {
         this.$store.dispatch('getUserInfo')
-          .then(response =>{
-            this.$store.dispatch('setUserInfo', response.data.response)
-            this.$store.dispatch('getUserStatus')
-          })
-          .catch(error => {
-            changeToken()
-          })
       }
     }
   },

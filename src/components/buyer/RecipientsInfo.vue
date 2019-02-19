@@ -44,7 +44,7 @@ export default {
     },
   },
   mounted() {
-    this.getRecipientsInfo()
+    // this.getRecipientsInfo()
   }
 }
 </script>

@@ -97,7 +97,7 @@ export default {
     }
   },
   computed: {
-    shoppingCarts: function() {
+    shoppingCarts:function(){
       return this.$store.getters.shoppingCarts
     },
     thirdPay: function() {
@@ -119,7 +119,6 @@ export default {
     }
   },
   mounted() {
-    this.getShoppingCart(),
       this.getThirdPay()
   }
 }

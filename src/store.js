@@ -2,7 +2,7 @@ import Vue from 'vue'
 import Vuex from 'vuex'
 import API from './units/API.js'
 import formAPI from './units/formAPI.js'
-
+import token from './units/token.js'
 Vue.use(Vuex)
 
 export default new Vuex.Store({
@@ -101,18 +101,27 @@ export default new Vuex.Store({
       API('POST','token',data)
       .then(response=>{
         dispatch('getUserInfo')
-        .then(response => {
-          dispatch('setUserInfo', response.data.response)
-          dispatch('getProduct')
-          dispatch('getUserStatus')
-        })
+        dispatch('getUserStatus')
+        dispatch('getProduct')
+        dispatch('getRecipientsInfo')
+        dispatch('getShoppingCart')
+        dispatch('getThirdPay')
       })
     },
-    getUserInfo:({commit})=>{
-      return API('GET','users')
-    },
-    setUserInfo:({commit},data)=>{
-      commit('setUserInfo',data)
+    getUserInfo:({commit,dispatch})=>{
+      API('GET','users')
+      .then(response=>{
+        commit('setUserInfo',response.data.response)
+        dispatch('getUserStatus')
+        dispatch('getProduct')
+        dispatch('getRecipientsInfo')
+        dispatch('getShoppingCart')
+        dispatch('getThirdPay')
+      })
+      .catch(err=>{
+        console.log(err)
+        token()
+      })
     },
     getUserStatus:({commit,dispatch})=>{
       API('GET','user-status')
@@ -128,7 +137,7 @@ export default new Vuex.Store({
       return formAPI('POST','items',formData)
     },
     getProduct:({commit})=>{
-      return API('GET','items')
+      API('GET','items')
       .then(response=>{
         console.log(response)
         commit('setProduct',response.data.response)
@@ -185,6 +194,13 @@ export default new Vuex.Store({
         dispatch('getSellingProduct')
       })
     },
+    // updataUserInfo:({dispatch},userInfo)=>{
+    //   API('PUT','users',userInfo)
+    //   .then(response=>{
+    //     console.log(response)
+    //     dispatch('getUserInfo')
+    //   })
+    // },
     addRecipients:({dispatch},recipients)=>{
       API('POST','recipients',recipients)
       .then(response=>{
@@ -266,8 +282,6 @@ export default new Vuex.Store({
       })
     },
     payingPayment:({},paymentInfo)=>{
-      console.log(paymentInfo.payment)
-      console.log(paymentInfo.payment.order_id)
       API('POST',`payments/${paymentInfo.thirdPayId}`,paymentInfo.payment)
       .then(response=>{
         window.open(response.data.response)

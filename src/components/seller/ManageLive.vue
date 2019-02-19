@@ -87,9 +87,6 @@ export default {
     }
   },
   methods: {
-    getProduct: function() {
-      this.$store.dispatch('getProduct')
-    },
     getSellingProduct: function() {
       this.$store.dispatch('getSellingProduct')
     },
@@ -120,9 +117,6 @@ export default {
       return this.$store.getters.sellingProduct
     }
   },
-  mounted() {
-    this.getProduct()
-  }
 }
 </script>
 

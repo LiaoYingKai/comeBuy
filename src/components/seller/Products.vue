@@ -25,10 +25,6 @@ export default {
     Product
   },
   methods: {
-    getProduct: function() {
-      this.$store.dispatch('getProduct')
-
-    },
     addProduct: function() {
       this.isOpen = true
     },
@@ -41,9 +37,6 @@ export default {
       return this.$store.getters.products
     }
   },
-  mounted() {
-    this.getProduct()
-  }
 }
 </script>
 
