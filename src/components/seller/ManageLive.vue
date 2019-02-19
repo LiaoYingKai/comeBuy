@@ -23,7 +23,7 @@
           </el-col>
         </el-row>
       </div>
-      <el-button @click="closeLive" v-if="isLive">關閉直播</el-button>
+      <el-button @click="closeLive" v-if="isLive && isSeller">關閉直播</el-button>
       <el-button @click="startLive" v-else :disabled="products.length === 0">開始直播</el-button>
     </el-col>
     <el-col :span="10" :offset="2">
