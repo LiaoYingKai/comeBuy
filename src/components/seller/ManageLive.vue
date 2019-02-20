@@ -51,7 +51,13 @@
                   商品描述：{{product.description}}
                 </div>
                 <div class="">
-                  商品數量：{{product.stock}}
+                  商品總數量：{{product.stock}}
+                </div>
+                <div class="" v-if="sellingProduct.item_id === product.id">
+                  剩餘數量：{{sellingProduct.remaining_quantity}}
+                </div>
+                <div class="" v-if="sellingProduct.item_id === product.id">
+                  販賣數量：{{sellingProduct.sold_quantity}}
                 </div>
                 <div class="">
                   商品成本：{{product.cost}}
@@ -59,7 +65,7 @@
                 <div class="">
                   商品售價：{{product.unit_price}}
                 </div>
-                </el-col>
+              </el-col>
             </el-row>
             <el-button @click="sellProduct(product.id)">商品推播</el-button>
           </el-collapse-item>
@@ -101,7 +107,12 @@ export default {
     },
     goAddProduct: function() {
       this.$router.push('product')
-    }
+    },
+    render: function() {
+      setInterval(() => {
+        this.getSellingProduct()
+      }, 5000)
+    },
   },
   computed: {
     products: function() {
@@ -110,13 +121,16 @@ export default {
     isLive: function() {
       return this.$store.getters.userStatus.result
     },
-    isSeller: function(){
+    isSeller: function() {
       return this.$store.getters.userStatus.response.host
     },
     sellingProduct: function() {
       return this.$store.getters.sellingProduct
     }
   },
+  mounted() {
+    this.render()
+  }
 }
 </script>
 
@@ -132,13 +146,13 @@ export default {
 button {
     margin-top: 10px;
 }
-img{
-  width: 100%;
-  height:auto;
+img {
+    width: 100%;
+    height: auto;
 }
-.productStyle{
-  div{
-    text-align: left;
-  }
+.productStyle {
+    div {
+        text-align: left;
+    }
 }
 </style>

@@ -78,7 +78,12 @@ export default {
     },
     closeSelect: function(){
       this.isSelect = false
-    }
+    },
+    render: function() {
+      setInterval(() => {
+        this.getSellingProduct()
+      }, 5000)
+    },
   },
   computed: {
     isLive: function() {
@@ -91,6 +96,9 @@ export default {
       return this.$store.getters.userStatus
     }
   },
+  mounted(){
+    this.render()
+  }
 }
 </script>
 <style lang="scss" scoped>
