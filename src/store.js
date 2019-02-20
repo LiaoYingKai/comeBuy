@@ -108,6 +108,17 @@ export default new Vuex.Store({
         dispatch('getThirdPay')
       })
     },
+    updataUserInfo:({dispatch,commit},userInfo)=>{
+      API('PUT','users',userInfo)
+      .then(response=>{
+        console.log(response)
+        API('GET','users')
+        .then(response=>{
+          console.log(response)
+          commit('setUserInfo',response.data.response)
+        })
+      })
+    },
     getUserInfo:({commit,dispatch})=>{
       API('GET','users')
       .then(response=>{
@@ -194,13 +205,6 @@ export default new Vuex.Store({
         dispatch('getSellingProduct')
       })
     },
-    // updataUserInfo:({dispatch},userInfo)=>{
-    //   API('PUT','users',userInfo)
-    //   .then(response=>{
-    //     console.log(response)
-    //     dispatch('getUserInfo')
-    //   })
-    // },
     addRecipients:({dispatch},recipients)=>{
       API('POST','recipients',recipients)
       .then(response=>{
