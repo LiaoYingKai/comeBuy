@@ -37,8 +37,18 @@
     </el-row>
   </div>
   <div class="" v-for="recipient in recipientsInfo">
-    {{recipient}}
-    <el-button @click="deleteRecipient(recipient.recipient_id)"> 刪除收件人 </el-button>
+    <div class="recipientContent">
+      <p>
+        收件人姓名：{{recipient.name}}
+      </p>
+      <p>
+        收件人地址：{{recipient.address.city}} {{recipient.address.district}} {{recipient.address.others}}
+      </p>
+      <p>
+        收件人電話：{{recipient.phone.phone_number}}
+      </p>
+      <el-button @click="deleteRecipient(recipient.recipient_id)"> 刪除收件人 </el-button>
+    </div>
   </div>
   <AddRecipient :isOpen="isOpen" @closeAddRecipient="closeAddRecipient" />
   <el-button @click="openAddRecipient">新增收件人地址</el-button>
@@ -95,7 +105,6 @@ export default {
     confirmEdit: function() {
       this.editInfo.phone.phone_number ? this.editInfo.phone.phone_number : this.userInfo.phone.phone_number
       this.editInfo.email ? this.editInfo.email : this.userInfo.email
-      console.log('fuck',this.editInfo)
       this.$store.dispatch('updataUserInfo',this.editInfo)
       this.isEditEmail = false
       this.isEditPhone = false
@@ -107,7 +116,7 @@ export default {
     },
     recipientsInfo: function() {
       return this.$store.getters.recipientsInfo
-    },
+    }
   },
 }
 </script>
@@ -128,5 +137,9 @@ export default {
     .divInline {
         display: inline-block;
     }
+}
+.recipientContent{
+  background-color: #fff;
+  padding:20px;
 }
 </style>

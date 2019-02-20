@@ -30,7 +30,7 @@
         </div>
         <div class="">
           <el-button @click="postEdit(productInfo.id)" v-if="isEdit">完成</el-button>
-          <el-button @click="aditProduct" v-else>編輯</el-button>
+          <el-button @click="editProduct" v-else>編輯</el-button>
           <el-button @click="cancelEditProduct" v-if="isEdit">取消</el-button>
           <el-button @click="deleteProduct(productInfo.id)" v-else>刪除</el-button>
         </div>
@@ -77,7 +77,7 @@ export default {
           });
         });
     },
-    aditProduct: function(id) {
+    editProduct: function(id) {
       this.isEdit = true
     },
     cancelEditProduct: function() {

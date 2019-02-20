@@ -47,11 +47,7 @@ export default {
     }
   },
   methods: {
-    test: function() {
-      console.log("fuck")
-    },
     logout: function() {
-      console.log("fuck")
       $cookies.remove('FBtoken')
       this.$router.push('/')
     }
@@ -79,7 +75,7 @@ nav {
     z-index: 1;
 }
 .navbar {
-    z-index: 10;
+    z-index: 1000;
     margin: 0 auto !important;
     height: 60px;
     display: flex;

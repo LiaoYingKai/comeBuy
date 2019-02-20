@@ -1,8 +1,9 @@
 <template >
 <div class="modal">
   <div class="modal-content">
+    <h3>選擇收件人</h3>
     <div class="" v-for="recipient in recipients" :key="recipient.recipient_id">
-      <el-radio v-model="recipientId" :label="recipient.recipient_id">{{recipient}}</el-radio>
+      <el-radio v-model="recipientId" :label="recipient.recipient_id">{{recipient.address.city}} {{recipient.address.district}} {{recipient.address.others}}</el-radio>
     </div>
     <el-button @click="cancelAdd">取消</el-button>
     <el-button @click="addIntoShoppingCart">加入購物車</el-button>
@@ -43,5 +44,8 @@ export default {
 @import '../../scss/mixin.scss';
 .modal {
     @include modal();
+}
+h3{
+  margin:10px;
 }
 </style>

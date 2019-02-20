@@ -11,6 +11,9 @@
         <input type="checkbox" :id="shoppingCart.id" :value="shoppingCart.id" v-model="paymentInfo.payment.order_id">
         <label :for="shoppingCart.id"></label>
       </el-col>
+      <el-col :span="1" :offset="1" v-else>
+        <input type="checkbox" disabled>
+      </el-col>
       <el-col :span="6">
         <img :src="shoppingCart.images" alt="">
       </el-col>
@@ -18,7 +21,7 @@
         <ShoppingCartProduct :shoppingCart="shoppingCart" />
       </el-col>
     </el-row>
-    <el-button  @click="openPay" v-if="activeName == 'unchecked'" :disabled="!shoppingCartList.length"> 付款 </el-button>
+    <el-button @click="openPay" v-if="activeName == 'unchecked'" :disabled="!shoppingCartList.length"> 付款 </el-button>
   </div>
   <div class="modal" v-if="isPay">
     <div class="modal-content">
@@ -45,9 +48,9 @@ export default {
       activeName: 'unchecked',
       shoppingCartList: [],
       isPay: false,
-      paymentInfo:{
-        thirdPayId:'',
-        payment:{
+      paymentInfo: {
+        thirdPayId: '',
+        payment: {
           order_id: [],
           ClintBackURL: "http://localhost:8080/mainPage/ShoppingCart",
           source: "mobile"
@@ -86,48 +89,49 @@ export default {
         this.shoppingCartList = this.shoppingCarts
       }
     },
-    openPay:function(){
+    openPay: function() {
       this.isPay = true
     },
-    closePay:function(){
+    closePay: function() {
       this.isPay = false
     },
-    cancelPay:function(){
+    cancelPay: function() {
       this.closePay()
     }
   },
   computed: {
-    shoppingCarts:function(){
+    shoppingCarts: function() {
       return this.$store.getters.shoppingCarts
     },
     thirdPay: function() {
       return this.$store.getters.thirdPay
     },
-    totalPay: function(){
+    totalPay: function() {
       let total = 0
-      this.shoppingCarts.forEach(item=>{
-        if(this.paymentInfo.payment.order_id.indexOf(item.id) >= 0){
-          total += item.quantity* item.unit_price
+      this.shoppingCarts.forEach(item => {
+        if (this.paymentInfo.payment.order_id.indexOf(item.id) >= 0) {
+          total += item.quantity * item.unit_price
         }
       })
       return total
     }
   },
-  watch: {
-    shoppingCarts: function() {
+  watch:{
+    shoppingCarts:function(){
       this.filterShoppingCart()
     }
   },
   mounted() {
-      this.getThirdPay()
+    this.getThirdPay(),
+      this.filterShoppingCart()
   }
 }
 </script>
 
 <style lang="scss" scoped>
 @import '../../scss/mixin';
-h3{
-  margin: 5px;
+h3 {
+    margin: 5px;
 }
 img {
     width: 100%;
