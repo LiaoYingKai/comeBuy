@@ -20,6 +20,7 @@ export default new Vuex.Store({
     countryCode:[],
     shoppingCarts:[],
     thirdPay:[],
+    sellerOrderInfo:{}
   },
   getters:{
     fbStatus:(state)=>{
@@ -57,6 +58,9 @@ export default new Vuex.Store({
     },
     thirdPay:(state)=>{
       return state.thirdPay
+    },
+    sellerOrderInfo:(state)=>{
+      return state.sellerOrderInfo
     }
   },
   mutations: {
@@ -98,6 +102,9 @@ export default new Vuex.Store({
     },
     setThirdPay:(state,thirdPay)=>{
       state.thirdPay = thirdPay
+    },
+    setAllSellerOrder:(state,sellerOrderInfo)=>{
+      state.sellerOrderInfo = sellerOrderInfo
     }
   },
   actions: {
@@ -138,6 +145,7 @@ export default new Vuex.Store({
         dispatch('getRecipientsInfo')
         dispatch('getShoppingCart')
         dispatch('getThirdPay')
+        dispatch('getAllSellerOrder')
       })
       .catch(err=>{
         console.log(err)
@@ -279,6 +287,7 @@ export default new Vuex.Store({
       .then(response=>{
         console.log(response)
         dispatch('getSellingProduct')
+        dispatch('getShoppingCart')
       })
     },
     getShoppingCart:({commit})=>{
@@ -301,6 +310,13 @@ export default new Vuex.Store({
         window.open(response.data.response)
         console.log(response)
       })
-    }
+    },
+    getAllSellerOrder:({commit})=>{
+      API('GET','seller-orders')
+      .then(response=>{
+        console.log(response)
+        commit('setAllSellerOrder',response.data.response)
+      })
+    },
   }
 })

@@ -68,7 +68,7 @@ export default {
     pay: function() {
       console.log(this.paymentInfo)
       this.closePay()
-      this.$store.dispatch('payingPayment', paymentInfo)
+      this.$store.dispatch('payingPayment', this.paymentInfo)
     },
     filterShoppingCart: function() {
       if (this.activeName === "unchecked") {

@@ -1,11 +1,16 @@
 <template >
 <div class="">
-  訂單管理
+  {{sellerOrderInfo}}
 </div>
 </template>
 
 <script>
 export default {
+  computed:{
+    sellerOrderInfo: function(){
+      return this.$store.getters.sellerOrderInfo
+    }
+  }
 }
 </script>
 
