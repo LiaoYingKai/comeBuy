@@ -7,6 +7,7 @@ Vue.use(Vuex)
 
 export default new Vuex.Store({
   state: {
+    fbStatus:{},
     fbToken:'',
     userInfo:'',
     userStatus:{},
@@ -18,9 +19,12 @@ export default new Vuex.Store({
     taiwanCity:[],
     countryCode:[],
     shoppingCarts:[],
-    thirdPay:[]
+    thirdPay:[],
   },
   getters:{
+    fbStatus:(state)=>{
+      return state.fbStatus
+    },
     token:(state)=>{
       return state.fbToken
     },
@@ -56,6 +60,9 @@ export default new Vuex.Store({
     }
   },
   mutations: {
+    setFBStatus:(state,status)=>{
+      state.fbStatus = status
+    },
     setToken:(state,token)=>{
       state.fbToken = token
     },
@@ -94,6 +101,9 @@ export default new Vuex.Store({
     }
   },
   actions: {
+    setFBStatus:({commit},status)=>{
+      commit('setFBStatus',status)
+    },
     getToken:({commit})=>{
       commit('setToken',$cookies.get('FBtoken'))
     },

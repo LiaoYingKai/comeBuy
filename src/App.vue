@@ -5,7 +5,6 @@
 </template>
 
 <script>
-import changeToken from './units/token.js'
 export default {
   name: 'App',
   methods: {
@@ -15,7 +14,7 @@ export default {
       }
     }
   },
-  created() {
+  mounted() {
     this.$store.dispatch('getToken')
     this.getUserInfo()
   }
